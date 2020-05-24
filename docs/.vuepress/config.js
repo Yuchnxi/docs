@@ -1,4 +1,7 @@
+const moment = require('moment');
+
 module.exports = {
+  base: "/docs/",
   title: "yuchenxi",
   description: "yuchenxi",
   head: [
@@ -6,9 +9,20 @@ module.exports = {
     ['meta', { name: 'author', content: 'yuchenxi' }],
     ['meta', { name: 'keywords', content: 'vuepress 介绍, vuepress 说明, yuchenxi' }]
   ],
+  plugins: [
+    [
+      '@vuepress/last-updated',
+      {
+        transformer: (timestamp) => {
+          moment.locale("zh-cn")
+          return moment(timestamp).format('LLLL')
+        }
+      }
+    ]
+  ],
   themeConfig: {
     // 最后更新时间
-    lastUpdated: '更新时间:', // string | boolean
+    lastUpdated: '更新时间', // string | boolean
     // 导航栏logo
     // logo: '/assets/img/hero.png',
     // navbar: false, // 禁用所有页面的导航栏
